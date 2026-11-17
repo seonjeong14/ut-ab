@@ -1,0 +1,71 @@
+:root {
+  --bg: #f4f4f5;
+  --ink: #18181b;
+  --sub: #52525b;
+  --line: #d4d4d8;
+  --accent: #e5484d;
+  --stage: #111;
+}
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html, body { margin: 0; height: 100%; background: var(--bg); color: var(--ink);
+  font: 16px/1.55 -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif; }
+#app { height: 100%; }
+
+.page { display: none; max-width: 480px; margin: 0 auto; padding: 24px 16px 40px; }
+.page.on { display: block; }
+.page h1 { font-size: 22px; margin: 8px 0 16px; }
+.page ul { padding-left: 20px; }
+.box { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 16px; }
+.scenario { font-size: 17px; line-height: 1.7; }
+.note { color: var(--sub); font-size: 14px; }
+.mono { font-family: ui-monospace, Menlo, monospace; font-size: 12px; word-break: break-all; }
+.btn { display: block; width: 100%; margin: 10px 0 0; padding: 14px; font-size: 16px; border-radius: 12px;
+  border: 1px solid var(--line); background: #fff; color: var(--ink); }
+.btn.primary { background: var(--ink); color: #fff; border-color: var(--ink); }
+.btn:disabled { opacity: .4; }
+.operator { margin-top: 32px; padding-top: 16px; border-top: 1px dashed var(--line); }
+
+/* 설문 */
+fieldset { border: 0; margin: 0 0 22px; padding: 0; }
+legend { font-weight: 600; margin-bottom: 8px; }
+.scale { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; }
+.scale label, .opts label { display: flex; align-items: center; justify-content: center; gap: 6px;
+  border: 1px solid var(--line); border-radius: 10px; background: #fff; padding: 10px 4px; font-size: 15px; }
+.scale input, .opts input { accent-color: var(--ink); }
+.scale-legend { display: flex; justify-content: space-between; color: var(--sub); font-size: 12px; margin-top: 4px; }
+.opts { display: grid; gap: 6px; }
+.opts label { justify-content: flex-start; padding: 10px 12px; }
+textarea, input[type=text] { width: 100%; border: 1px solid var(--line); border-radius: 10px; padding: 10px; font: inherit; }
+
+/* 과업 화면 */
+.page.task { max-width: none; padding: 0; height: 100%; background: var(--stage); }
+.page.task.on { display: flex; flex-direction: column; }
+.runner-bar { flex: 0 0 auto; display: flex; justify-content: space-between; gap: 8px;
+  padding: max(6px, env(safe-area-inset-top)) 10px 6px; background: #000; }
+.runner-bar button { background: #27272a; color: #fafafa; border: 0; border-radius: 8px; padding: 7px 12px; font-size: 13px; }
+#stage-wrap { flex: 1 1 auto; position: relative; overflow: hidden; display: flex; justify-content: center; align-items: flex-start; }
+#device { position: relative; width: 350px; height: 761px; transform-origin: top left; background: #fff; overflow: hidden; }
+
+.layer { position: absolute; overflow: hidden; }
+.layer.inactive { pointer-events: none; }
+.layer.sheet-bottom { border-radius: 14px 14px 0 0; }
+.scroller { position: absolute; inset: 0; overflow: hidden; }
+.scroller.y { overflow-y: auto; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; scrollbar-width: none; }
+.scroller.y::-webkit-scrollbar { display: none; }
+.content { position: relative; width: 100%; }
+.content > img.bg, .nest-inner > img.bg { display: block; width: 100%; height: 100%; user-select: none; -webkit-user-drag: none; pointer-events: none; }
+.nest { position: absolute; overflow-y: auto; scrollbar-width: none; overscroll-behavior: contain; }
+.nest::-webkit-scrollbar { display: none; }
+.nest-inner { position: relative; width: 100%; }
+.fixedlayer { position: absolute; background-repeat: no-repeat; }
+.hot { position: absolute; background: transparent; border: 0; padding: 0; margin: 0; cursor: pointer; }
+.dim { position: absolute; inset: 0; }
+.probe { position: absolute; left: 0; width: 100%; pointer-events: none; }
+
+body.debug .hot { outline: 2px solid rgba(0, 120, 255, .7); background: rgba(0, 120, 255, .12); }
+body.debug .probe { outline: 2px dashed rgba(255, 0, 120, .7); }
+
+.modal { position: fixed; inset: 0; background: rgba(0, 0, 0, .45); display: flex; align-items: flex-end; z-index: 10; }
+.modal[hidden] { display: none; }
+.modal .sheet { width: 100%; max-width: 480px; margin: 0 auto; background: #fff; border-radius: 16px 16px 0 0; padding: 20px 16px max(20px, env(safe-area-inset-bottom)); }
+.modal h2 { margin: 0 0 10px; font-size: 18px; }
